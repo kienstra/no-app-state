@@ -1,11 +1,11 @@
-import { useAppContext } from '../Store/context';
+import { useAppContext } from '../Store/context'
 
 export function AddBooksComponent({addBook, newBookName}) {
-  const {dispatch} = useAppContext();
+  const {dispatch} = useAppContext()
   function getValidationMessages(newBookName) {
     return newBookName
       ? []
-      : ['No book name'];
+      : ['No book name']
   }
 
   return (
@@ -13,7 +13,7 @@ export function AddBooksComponent({addBook, newBookName}) {
       <form
         onSubmit={(event) => {
           event.preventDefault()
-          const name = event.target.bookName.value;
+          const name = event.target.bookName.value
           if (getValidationMessages(name).length) {
             dispatch({
               type: 'SET_VALIDATION_MESSAGES',

@@ -7,7 +7,7 @@ import { isAuthorListDisplaying } from '../Store/selector'
 import { useAppContext } from '../Store/context'
 
 export function AuthorsComponent() {
-  const {state, dispatch} = useAppContext();
+  const {state, dispatch} = useAppContext()
 
   return (
     <>

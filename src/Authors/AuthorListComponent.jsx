@@ -1,8 +1,8 @@
-import { authorsVm } from '../Store/selector';
-import { useAppContext } from '../Store/context';
+import { authorsVm } from '../Store/selector'
+import { useAppContext } from '../Store/context'
 
 export function AuthorListComponent() {
-  const {state} = useAppContext();
+  const {state} = useAppContext()
 
   return (
     <>

@@ -1,7 +1,7 @@
-import { useAppContext } from '../Store/context';
+import { useAppContext } from '../Store/context'
 
 export function LogoutComponent() {
-  const { dispatch } = useAppContext();
+  const { dispatch } = useAppContext()
   return (
     <div
       onClick={() => dispatch({type: 'LOG_OUT'})}

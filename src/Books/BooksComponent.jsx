@@ -6,7 +6,7 @@ import { useAppContext } from '../Store/context'
 import { booksVm } from '../Store/selector'
 
 export function BooksComponent() {
-  const { dispatch, state } = useAppContext();
+  const { dispatch, state } = useAppContext()
   return (
     <>
       <h1>Books</h1>

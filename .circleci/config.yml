@@ -1,0 +1,11 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.2
+
+workflows:
+  build-test:
+    jobs:
+      - node/test
+      - node/run:
+          npm-run: 'lint'

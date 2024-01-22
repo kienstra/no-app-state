@@ -4,27 +4,27 @@ import { SingleBookResultStub } from '../Stubs/SingleBookResultStub'
 import { SingleAuthorsResultStub } from '../Stubs/SingleAuthorsResultStub'
 import { ManyAuthorsResultStub } from '../Stubs/ManyAuthorsResultStub'
 import { StubHttpGateway } from '../Core/StubHttpGateway'
-import { describe, expect, it, vi } from 'vitest';
-import { makeReducers } from '../Store/reducer';
-import { authorsVm, isAuthorListDisplaying } from '../Store/selector';
-import initialState from '../Store/initialState';
+import { describe, expect, it, vi } from 'vitest'
+import { makeReducers } from '../Store/reducer'
+import { authorsVm, isAuthorListDisplaying } from '../Store/selector'
+import initialState from '../Store/initialState'
 
-const email = 'email@example.com';
-const token = '12345';
+const email = 'email@example.com'
+const token = '12345'
 
 function getStubGateway(authorsStub) {
-  const httpGateway = new StubHttpGateway();
+  const httpGateway = new StubHttpGateway()
   const books = {
     1: 'bookA',
     2: 'bookB',
     3: 'bookC',
   }
   httpGateway.get = vi.fn().mockImplementation((path) => {
-    const pattern = /\/book\?emailOwnerId=[a-z]+@[a-z]+\.[a-z]+&bookId=(\d)/;
+    const pattern = /\/book\?emailOwnerId=[a-z]+@[a-z]+\.[a-z]+&bookId=(\d)/
     if (path.indexOf('/authors') !== -1) {
       return Promise.resolve(authorsStub())
     } else if (path.match(pattern)) {
-      const bookId = Number(path.match(pattern)[1]);
+      const bookId = Number(path.match(pattern)[1])
       return Promise.resolve(SingleBookResultStub(books[bookId], bookId))
     }
   })
@@ -37,7 +37,7 @@ function getStubGateway(authorsStub) {
     }
   })
 
-  return httpGateway;
+  return httpGateway
 }
 
 describe('authors', () => {
@@ -77,7 +77,7 @@ describe('authors', () => {
     })
 
     it('should hide author list (toggle) when has more than 4 authors', async () => {
-      const httpGateway = getStubGateway(ManyAuthorsResultStub);
+      const httpGateway = getStubGateway(ManyAuthorsResultStub)
 
       expect(
         isAuthorListDisplaying(
@@ -96,7 +96,7 @@ describe('authors', () => {
   describe('saving', () => {
     it('should allow books to be staged and then save authors and books to api', async () => {
       const authorName = 'Ernest Hemingway'
-      const httpGateway = getStubGateway(SingleAuthorsResultStub);
+      const httpGateway = getStubGateway(SingleAuthorsResultStub)
       const state = await makeReducers(httpGateway)(
         {
           ...initialState,
@@ -106,7 +106,7 @@ describe('authors', () => {
           type: 'ADD_AUTHOR_BOOK',
           payload: 'A Movable Feast',
         }
-      );
+      )
 
       const newState = await makeReducers(httpGateway)(
         state,

@@ -1,16 +1,16 @@
-import { navVm } from '../Store/selector';
+import { navVm } from '../Store/selector'
 import { LogoutComponent } from '../Authentication/LogoutComponent'
-import { useAppContext } from '../Store/context';
+import { useAppContext } from '../Store/context'
 
 export function NavigationComponent() {
-  const { dispatch, state } = useAppContext();
+  const { dispatch, state } = useAppContext()
 
   return (
     <div className="navigation-container">
       <div
         className="navigation-item-header"
         style={{ backgroundColor: '#5BCA06' }
-      }>
+        }>
         {navVm(state).currentSelectedVisibleName}
       </div>
       {navVm(state).menuItems.map((menuItem, i) => {

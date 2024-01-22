@@ -1,7 +1,7 @@
-import { useAppContext } from '../../Store/context';
+import { useAppContext } from '../../Store/context'
 
 export function MessagesComponent() {
-  const {state} = useAppContext();
+  const {state} = useAppContext()
 
   return (
     <>

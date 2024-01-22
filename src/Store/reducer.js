@@ -1,19 +1,19 @@
-import responseToPm from '../Books/responseToPm';
-import singleResponseToPm from '../Books/singleResponseToPm';
-import responseToMessage from '../Core/Messages/responseToMessage';
-import hasSchema from './hasSchema';
-import initialState from './initialState';
-import { currentNode } from './selector';
-import { HttpGateway } from '../Core/HttpGateway';
-import { RouterGateway } from '../Routing/RouterGateway';
+import responseToPm from '../Books/responseToPm'
+import singleResponseToPm from '../Books/singleResponseToPm'
+import responseToMessage from '../Core/Messages/responseToMessage'
+import hasSchema from './hasSchema'
+import initialState from './initialState'
+import { currentNode } from './selector'
+import { HttpGateway } from '../Core/HttpGateway'
+import { RouterGateway } from '../Routing/RouterGateway'
 
 export function runActions(actions, reducer, state) {
   return actions.reduce(
     async (s, action) => {
-      return reducer(await s, action);
+      return reducer(await s, action)
     },
     Promise.resolve(state)
-  );
+  )
 }
 
 function makeAddBook(httpGateway) {
@@ -92,7 +92,7 @@ function makeLogIn(httpGateway, routerGateway) {
           }
         }
       )
-    : {
+      : {
         ...state,
         messages: [
           'Failed: no user record.',
@@ -129,7 +129,7 @@ function makeRegister(httpGateway, routerGateway) {
           }
         }
       )
-    : {
+      : {
         ...state,
         messages: [
           'Failed: could not register.',
@@ -163,12 +163,12 @@ function makeLogOut(httpGateway, routerGateway) {
 function findRoute(state, routeId) {
   return state.router.routes.find((route) => {
     return route.routeId === routeId
-  }) || { routeId: 'loadingSpinner', routeDef: { path: '' } };
+  }) || { routeId: 'loadingSpinner', routeDef: { path: '' } }
 }
 
 function makeUpdateRoute(httpGateway, routerGateway) {
   return function updateRoute(state, action) {
-    const { newRouteId, params, query } = action.payload;
+    const { newRouteId, params, query } = action.payload
     const oldRoute = findRoute(state, state.router.currentRoute.routeId)
     const newRoute = findRoute(state, newRouteId)
     const hasToken = !!state?.user?.token
@@ -256,12 +256,12 @@ function makeAddAuthor(httpGateway) {
         }
       )
       : {
-          ...state,
-          messages: [
-            ...state.messages,
-            'Please add a book'
-          ],
-        };
+        ...state,
+        messages: [
+          ...state.messages,
+          'Please add a book'
+        ],
+      }
   }
 }
 
@@ -269,7 +269,7 @@ function addAuthorBook(state, action) {
   return {
     ...state,
     addedBooks: [...(state?.addedBooks ?? []), { visibleName: action.payload }],
-  };
+  }
 }
 
 function makeInit(routerGateway) {
@@ -283,11 +283,11 @@ function makeInit(routerGateway) {
             [r.routeDef.path]: {
               as: r.routeId,
             }
-          };
+          }
         },
         {}
       )
-    );
+    )
 
     return state
   }
@@ -324,10 +324,10 @@ function makeLoadAuthors(httpGateway) {
         async (bookId) => {
           return singleResponseToPm(
             await httpGateway.get(`/book?emailOwnerId=${state.user.email}&bookId=${bookId}`, state.user.token)
-          );
+          )
         }
       )
-    );
+    )
 
     return {
       ...state,
@@ -358,7 +358,7 @@ function toggleAuthorList(state) {
   return {
     ...state,
     isAuthorListToggledOn: !state.isAuthorListToggledOn,
-  };
+  }
 }
 
 export function makeReducers(
@@ -389,7 +389,7 @@ export function makeReducers(
     return validateSchema(
       await actions[action.type](state, action),
       initialState
-    );
+    )
   }
 }
 
@@ -397,10 +397,10 @@ function validateSchema(state, schema) {
   if (!hasSchema(state, schema)) {
     throw new Error(`State does not conform to schema.
       State: ${JSON.stringify(state)}
-      Schema: ${JSON.stringify(schema)}`);
+      Schema: ${JSON.stringify(schema)}`)
   }
 
-  return state;
+  return state
 }
 
-export const reducer = makeReducers(new HttpGateway(), new RouterGateway());
+export const reducer = makeReducers(new HttpGateway(), new RouterGateway())

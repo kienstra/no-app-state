@@ -7,7 +7,7 @@ import AppComponent from './AppComponent'
 import initialState from './Store/initialState'
 
 function useAsync(red, initial) {
-  const [state, updateState] = useState(initial);
+  const [state, updateState] = useState(initial)
 
   return {
     state,
@@ -22,7 +22,7 @@ function App() {
     <AppContext.Provider value={useAsync(reducer, initialState)}>
       <AppComponent />
     </AppContext.Provider>
-  );
+  )
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
