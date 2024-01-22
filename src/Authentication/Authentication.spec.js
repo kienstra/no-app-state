@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
-import { GetSuccessfulRegistrationStub } from '../TestTools/GetSuccessfulRegistrationStub'
-import { GetFailedRegistrationStub } from '../TestTools/GetFailedRegistrationStub'
-import { GetSuccessfulUserLoginStub } from '../TestTools/GetSuccessfulUserLoginStub'
-import { GetFailedUserLoginStub } from '../TestTools/GetFailedUserLoginStub'
-import routesToActions from '../TestTools/routesToActions';
+import { GetSuccessfulRegistrationStub } from '../Stubs/GetSuccessfulRegistrationStub'
+import { GetFailedRegistrationStub } from '../Stubs/GetFailedRegistrationStub'
+import { GetSuccessfulUserLoginStub } from '../Stubs/GetSuccessfulUserLoginStub'
+import { GetFailedUserLoginStub } from '../Stubs/GetFailedUserLoginStub'
+import routesToActions from '../Stubs/routesToActions';
 import { makeReducers, runActions } from '../Store/reducer';
 import initialState from '../Store/initialState';
 import { StubHttpGateway } from '../Core/StubHttpGateway';

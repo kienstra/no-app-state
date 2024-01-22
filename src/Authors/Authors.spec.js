@@ -1,8 +1,8 @@
-import { GetSuccessfulBookAddedStub } from '../TestTools/GetSuccessfulBookAddedStub'
-import { GetSuccessfulAuthorAddedStub } from '../TestTools/GetSuccessfulAuthorAddedStub'
-import { SingleBookResultStub } from '../TestTools/SingleBookResultStub'
-import { SingleAuthorsResultStub } from '../TestTools/SingleAuthorsResultStub'
-import { ManyAuthorsResultStub } from '../TestTools/ManyAuthorsResultStub'
+import { GetSuccessfulBookAddedStub } from '../Stubs/GetSuccessfulBookAddedStub'
+import { GetSuccessfulAuthorAddedStub } from '../Stubs/GetSuccessfulAuthorAddedStub'
+import { SingleBookResultStub } from '../Stubs/SingleBookResultStub'
+import { SingleAuthorsResultStub } from '../Stubs/SingleAuthorsResultStub'
+import { ManyAuthorsResultStub } from '../Stubs/ManyAuthorsResultStub'
 import { StubHttpGateway } from '../Core/StubHttpGateway'
 import { describe, expect, it, vi } from 'vitest';
 import { makeReducers } from '../Store/reducer';

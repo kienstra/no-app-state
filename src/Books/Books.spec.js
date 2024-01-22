@@ -2,8 +2,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { makeReducers, runActions } from '../Store/reducer';
 import initialState from '../Store/initialState';
 import { StubHttpGateway } from '../Core/StubHttpGateway';
-import { SingleBooksResultStub } from '../TestTools/SingleBooksResultStub'
-import { GetSuccessfulBookAddedStub } from '../TestTools/GetSuccessfulBookAddedStub'
+import { SingleBooksResultStub } from '../Stubs/SingleBooksResultStub'
+import { GetSuccessfulBookAddedStub } from '../Stubs/GetSuccessfulBookAddedStub'
 import { booksVm } from '../Store/selector';
 
 const newBookName = 'The Odyssey';

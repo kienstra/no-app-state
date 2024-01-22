@@ -4,9 +4,9 @@ import initialState from '../Store/initialState';
 import { navVm } from '../Store/selector';
 import { StubHttpGateway } from '../Core/StubHttpGateway';
 import { StubRouterGateway } from '../Routing/StubRouterGateway';
-import { GetSuccessfulUserLoginStub } from '../TestTools/GetSuccessfulUserLoginStub';
-import routesToActions from '../TestTools/routesToActions';
-import { SingleBooksResultStub } from '../TestTools/SingleBooksResultStub';
+import { GetSuccessfulUserLoginStub } from '../Stubs/GetSuccessfulUserLoginStub';
+import routesToActions from '../Stubs/routesToActions';
+import { SingleBooksResultStub } from '../Stubs/SingleBooksResultStub';
 
 function gateways() {
   const httpGateway = new StubHttpGateway();
