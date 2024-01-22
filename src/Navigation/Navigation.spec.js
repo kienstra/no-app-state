@@ -1,16 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
-import { makeReducers, runActions } from '../Store/reducer';
-import initialState from '../Store/initialState';
-import { navVm } from '../Store/selector';
-import { StubHttpGateway } from '../Core/StubHttpGateway';
-import { StubRouterGateway } from '../Routing/StubRouterGateway';
-import { GetSuccessfulUserLoginStub } from '../Stubs/GetSuccessfulUserLoginStub';
-import routesToActions from '../Stubs/routesToActions';
-import { SingleBooksResultStub } from '../Stubs/SingleBooksResultStub';
+import { describe, expect, it, vi } from 'vitest'
+import { makeReducers, runActions } from '../Store/reducer'
+import initialState from '../Store/initialState'
+import { navVm } from '../Store/selector'
+import { StubHttpGateway } from '../Core/StubHttpGateway'
+import { StubRouterGateway } from '../Routing/StubRouterGateway'
+import { GetSuccessfulUserLoginStub } from '../Stubs/GetSuccessfulUserLoginStub'
+import routesToActions from '../Stubs/routesToActions'
+import { SingleBooksResultStub } from '../Stubs/SingleBooksResultStub'
 
 function gateways() {
-  const httpGateway = new StubHttpGateway();
-  const routerGateway = new StubRouterGateway();
+  const httpGateway = new StubHttpGateway()
+  const routerGateway = new StubRouterGateway()
 
   httpGateway.get = vi.fn().mockImplementation(() => {
     return Promise.resolve(SingleBooksResultStub())
@@ -19,12 +19,12 @@ function gateways() {
     return Promise.resolve(GetSuccessfulUserLoginStub())
   })
 
-  return [httpGateway, routerGateway];
+  return [httpGateway, routerGateway]
 }
 
 describe('navigation', () => {
   it('anchor default state', () => {
-    const vm = navVm(initialState);
+    const vm = navVm(initialState)
     expect(vm.currentSelectedVisibleName).toBe('')
     expect(vm.showBack).toBe(false)
     expect(vm.menuItems).toEqual([])
@@ -44,7 +44,7 @@ describe('navigation', () => {
             },
           }
         )
-     ).currentSelectedVisibleName
+      ).currentSelectedVisibleName
     ).toBe('')
   })
 

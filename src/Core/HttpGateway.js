@@ -1,6 +1,6 @@
 export class HttpGateway {
   constructor() {
-    this.apiUrl = 'https://api.logicroom.co/secure-api/kienstraryan@gmail.com';
+    this.apiUrl = 'https://api.logicroom.co/secure-api/kienstraryan@gmail.com'
   }
 
   get = async (path, token) => {

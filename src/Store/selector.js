@@ -1,12 +1,12 @@
 import TreeModel from 'tree-model'
-import initialState from './initialState';
+import initialState from './initialState'
 
 /** @param {initialState} state */
 export function booksVm(state) {
   return Object.values(state.books ?? {})?.length
     ? Object.values(state.books).map((book) => {
-        return { visibleName: book.name }
-      })
+      return { visibleName: book.name }
+    })
     : []
 }
 
@@ -26,7 +26,7 @@ export function authorsVm(state) {
       ]
     },
     []
-  );
+  )
 }
 
 /** @param {initialState} state */
@@ -39,7 +39,7 @@ export function navVm(state) {
   const node = currentNode(state)
 
   if (!node) {
-    return state.nav;
+    return state.nav
   }
 
   return {
@@ -56,7 +56,7 @@ export function navVm(state) {
     showBack: node.parent
       ? true
       : state.nav.showBack,
-  };
+  }
 }
 
 /** @param {initialState} state */

@@ -1,7 +1,7 @@
 import { useAppContext } from '../Store/context'
 
 export function AddAuthorComponent() {
-  const { dispatch } = useAppContext();
+  const { dispatch } = useAppContext()
   function getValidationMessages(authorName) {
     return [
       ...(authorName === '' ? ['No author name'] : []),
@@ -15,7 +15,7 @@ export function AddAuthorComponent() {
         onSubmit={async (event) => {
           event.preventDefault()
 
-          const name = event.target.authorName.value;
+          const name = event.target.authorName.value
           if (getValidationMessages(name).length) {
             dispatch({
               type: 'SET_VALIDATION_MESSAGES',

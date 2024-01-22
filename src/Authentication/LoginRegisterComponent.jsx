@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { MessagesComponent } from '../Core/Messages/MessagesComponent'
-import { useAppContext } from '../Store/context';
+import { useAppContext } from '../Store/context'
 
 export function LoginRegisterComponent() {
-  const { dispatch } = useAppContext();
-  const [email, setEmail] = useState('');
-  const [option, setOption] = useState('');
+  const { dispatch } = useAppContext()
+  const [email, setEmail] = useState('')
+  const [option, setOption] = useState('')
   const [password, setPassword] = useState('')
 
   function getValidationMessages() {
@@ -75,10 +75,10 @@ export function LoginRegisterComponent() {
             dispatch({
               type: 'SET_VALIDATION_MESSAGES',
               payload: getValidationMessages(),
-            });
+            })
 
             if (getValidationMessages().length) {
-              return;
+              return
             }
 
             if (option === 'login') {

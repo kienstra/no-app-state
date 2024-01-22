@@ -1,22 +1,22 @@
-import { describe, expect, it, vi } from 'vitest';
-import { makeReducers, runActions } from '../Store/reducer';
-import initialState from '../Store/initialState';
-import { StubHttpGateway } from '../Core/StubHttpGateway';
+import { describe, expect, it, vi } from 'vitest'
+import { makeReducers, runActions } from '../Store/reducer'
+import initialState from '../Store/initialState'
+import { StubHttpGateway } from '../Core/StubHttpGateway'
 import { SingleBooksResultStub } from '../Stubs/SingleBooksResultStub'
 import { GetSuccessfulBookAddedStub } from '../Stubs/GetSuccessfulBookAddedStub'
-import { booksVm } from '../Store/selector';
+import { booksVm } from '../Store/selector'
 
-const newBookName = 'The Odyssey';
+const newBookName = 'The Odyssey'
 const email = 'jb@example.com'
 const token = '12345'
 
 describe('books', () => {
   describe('loading', () => {
     it('should show book list', async () => {
-      const httpGateway = new StubHttpGateway();
+      const httpGateway = new StubHttpGateway()
       httpGateway.get = vi.fn().mockImplementationOnce(() => {
         return Promise.resolve(SingleBooksResultStub())
-      });
+      })
 
       const state = await makeReducers(httpGateway)(
         {
@@ -27,7 +27,7 @@ describe('books', () => {
           type: 'LOAD_BOOKS',
           payload: 881,
         }
-      );
+      )
 
       expect(booksVm(state).length).toEqual(4)
       expect(booksVm(state)[0].visibleName).toEqual('Wind in the willows')
@@ -37,7 +37,7 @@ describe('books', () => {
 
   describe('adding a book', () => {
     it('makes a request to add the book', async () => {
-      const httpGateway = new StubHttpGateway();
+      const httpGateway = new StubHttpGateway()
       httpGateway.post = vi.fn().mockImplementationOnce(() => {
         return Promise.resolve(GetSuccessfulBookAddedStub())
       })
@@ -51,7 +51,7 @@ describe('books', () => {
           type: 'ADD_BOOK',
           payload: newBookName,
         }
-      );
+      )
 
       expect(httpGateway.post).toHaveBeenCalledWith(
         '/books',
@@ -60,11 +60,11 @@ describe('books', () => {
           emailOwnerId: email,
         },
         token
-      );
-    });
+      )
+    })
 
     it('resets books', async () => {
-      const httpGateway = new StubHttpGateway();
+      const httpGateway = new StubHttpGateway()
       httpGateway.post = vi.fn().mockImplementationOnce(() => {
         return Promise.resolve(GetSuccessfulBookAddedStub())
       })
@@ -84,26 +84,26 @@ describe('books', () => {
             user: { email, token },
           }
         )).books
-      ).toEqual({});
-    });
+      ).toEqual({})
+    })
 
     it('shows the last book added', async () => {
       expect(
         (await makeReducers(new StubHttpGateway())(
-            {
-              ...initialState,
-              user: { email, token },
-            },
-            {
-              type: 'ADD_BOOK',
-              payload: newBookName,
-            }
-          )).lastAddedBook
+          {
+            ...initialState,
+            user: { email, token },
+          },
+          {
+            type: 'ADD_BOOK',
+            payload: newBookName,
+          }
+        )).lastAddedBook
       ).toBe(newBookName)
     })
 
     it('shows the message', async () => {
-      const httpGateway = new StubHttpGateway();
+      const httpGateway = new StubHttpGateway()
       httpGateway.post = vi.fn().mockImplementationOnce(() => {
         return Promise.resolve(GetSuccessfulBookAddedStub())
       })
