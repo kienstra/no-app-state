@@ -1,6 +1,8 @@
 ## No App State
 
-Thanks to Logicroom.co for the test cases and components in this repo.
+Thanks to [Logicroom.co](https://www.logicroom.co/) for the test cases and components in this repo.
+
+This takes the Logicroom ideas in a functional direction.
 
 What if there was no app state…
 
