@@ -5,24 +5,22 @@ export function MessagesComponent() {
 
   return (
     <>
-      {state.messages &&
-        state.messages.map((item) => {
-          return (
-            <div style={{ backgroundColor: 'red' }} key={item}>
-              {' - '}
-              {item}
-            </div>
-          )
-        })}
-      {state.validationMessages &&
-        state.validationMessages.map((item, i) => {
-          return (
-            <div style={{ backgroundColor: 'orange' }} key={i}>
-              {' - '}
-              {item}
-            </div>
-          )
-        })}
+      {state.messages.map((item, i) => {
+        return (
+          <div style={{ backgroundColor: 'red' }} key={i}>
+            {' - '}
+            {item}
+          </div>
+        )
+      })}
+      {state.validationMessages.map((item, i) => {
+        return (
+          <div style={{ backgroundColor: 'orange' }} key={i}>
+            {' - '}
+            {item}
+          </div>
+        )
+      })}
     </>
   )
 }
