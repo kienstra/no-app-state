@@ -10,10 +10,9 @@ describe('init', () => {
     const routerGateway = new StubRouterGateway()
     routerGateway.registerRoutes = vi.fn()
 
-    await runActions(
-      [{ type: 'INIT' }],
-      makeReducers(httpGateway, routerGateway),
-      initialState
+    await makeReducers(httpGateway, routerGateway)(
+      initialState,
+      { type: 'INIT' }
     )
 
     expect(routerGateway.registerRoutes).toHaveBeenCalledOnce()

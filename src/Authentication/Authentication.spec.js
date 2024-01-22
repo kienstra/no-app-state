@@ -33,7 +33,7 @@ describe('Authentication', () => {
     it('should block secure routes when not logged in', async () => {
       expect(
         ( await runActions(
-          routesToActions(['homeLink']),
+          routesToActions(['authorsLink']),
           makeReducers(
             new StubHttpGateway(),
             new StubRouterGateway()
@@ -68,50 +68,95 @@ describe('Authentication', () => {
       ).toEqual('authorsLink-authorPolicyLink')
     })
 
-    //   it('should allow public route when not logged in', async () => {
-    //     await router.goToId('authorsLink-authorPolicyLink')
-    //     expect(routerGateway.goToId).toHaveBeenLastCalledWith('authorsLink-authorPolicyLink')
-    //   })
+    describe('register', () => {
+      it('redirects to the login link on success', async () => {
+        const httpGateway = new StubHttpGateway()
+        const routerGateway = new StubRouterGateway()
+        httpGateway.post = vi.fn().mockImplementation(() => {
+          return Promise.resolve(GetSuccessfulRegistrationStub())
+        })
+
+        expect((await makeReducers(
+          httpGateway,
+          routerGateway
+        )(
+          initialState,
+          {
+            type: 'REGISTER',
+            payload: {
+              email: 'email@example.com',
+              password: 'password',
+            },
+          })).router.currentRoute.routeId).toEqual('loginLink')
+      })
+    })
+
+    it('should show failed server message on failed register', async () => {
+      const httpGateway = new StubHttpGateway()
+      const routerGateway = new StubRouterGateway()
+      httpGateway.post = vi.fn().mockImplementation(() => {
+        return Promise.resolve(GetFailedRegistrationStub())
+      })
+
+      expect((await makeReducers(
+        httpGateway,
+        routerGateway
+      )(
+        initialState,
+        {
+          type: 'REGISTER',
+          payload: {
+            email: 'email@example.com',
+            password: 'password',
+          },
+        })).messages).toEqual(['Failed: could not register.'])
+    })
     // })
 
-    // describe('register', () => {
-    //   it('should show successful user message on successful register', async () => {
-    //     dataGateway.post = jest.fn().mockImplementation(() => {
-    //       return Promise.resolve(GetSuccessfulRegistrationStub())
-    //     })
+    it('should start at loginLink ', async () => {
+      expect(
+        (await runActions(
+          routesToActions(['homeLink']),
+          makeReducers(
+            new StubHttpGateway(),
+            new StubRouterGateway()
+          ),
+          {
+            ...initialState,
+            user: {
+              email: 'email@example.com',
+              password: 'password',
+            },
+          }
+        ) ).router.currentRoute.routeId
+      ).toEqual('loginLink')
+    })
 
-    //     await loginRegisterPresenter.register()
+    it('should go to homeLink on successful login (and populate userModel)', async () => {
+      const httpGateway = new StubHttpGateway()
+      const routerGateway = new StubRouterGateway()
 
-    //     expect(loginRegisterPresenter.showValidationWarning).toBe(false)
-    //     expect(loginRegisterPresenter.messages).toEqual(['User registered'])
-    //   })
+      httpGateway.post = vi.fn().mockImplementation(() => {
+        return Promise.resolve(GetSuccessfulUserLoginStub())
+      })
 
-    //   it('should show failed server message on failed register', async () => {
-    //     dataGateway.post = jest.fn().mockImplementation(() => {
-    //       return Promise.resolve(GetFailedRegistrationStub())
-    //     })
-
-    //     await loginRegisterPresenter.register()
-
-    //     expect(loginRegisterPresenter.showValidationWarning).toBe(true)
-    //     expect(loginRegisterPresenter.messages).toEqual([GetFailedRegistrationStub().result.message])
-    //   })
-    // })
-
-    //   it('should start at loginLink ', async () => {
-    //     await router.goToId('homeLink')
-    //     expect(routerRepository.currentRoute.routeId).toBe('loginLink')
-    //   })
-
-    //   it('should go to homeLink on successful login (and populate userModel)', async () => {
-    //     await appTestHarness.setupLogin(GetSuccessfulUserLoginStub)
-
-    //     expect(routerRepository.currentRoute.routeId).toBe('homeLink')
-    //     expect(router.userModel).toEqual({
-    //       email: appTestHarness.stubEmail,
-    //       token: GetSuccessfulUserLoginStub().result.token
-    //     })
-    //   })
+      expect(
+        ( await runActions(
+          [{
+            type: 'LOG_IN',
+            payload: {
+              email: 'email@example.com',
+              password: 'password',
+            }
+          }],
+          makeReducers(
+            httpGateway,
+            routerGateway
+          ),
+          initialState
+        ) ).router.currentRoute.routeId
+      ).toEqual('homeLink')
+    })
 
     it('failed login does not redirect to home', async () => {
       const httpGateway = new StubHttpGateway()
@@ -163,7 +208,6 @@ describe('Authentication', () => {
           initialState
         ) ).messages
       ).toEqual(['Failed: no user record.'])
-      // expect(loginRegisterPresenter.showValidationWarning).toBe(true)
     })
 
     it('should clear messages on route change', async () => {
