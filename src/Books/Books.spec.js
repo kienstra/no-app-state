@@ -12,7 +12,7 @@ const token = '12345'
 
 describe('books', () => {
   describe('loading', () => {
-    it('should show book list', async () => {
+    it('shows book list', async () => {
       const httpGateway = new StubHttpGateway()
       httpGateway.get = vi.fn().mockImplementationOnce(() => {
         return Promise.resolve(SingleBooksResultStub())
