@@ -137,4 +137,13 @@ describe('authors', () => {
       )
     })
   })
+
+  describe('list', () => {
+    it('toggles author list', async () => {
+      expect((await makeReducers()(
+        initialState,
+        { type: 'TOGGLE_AUTHOR_LIST' }
+      )).isAuthorListToggledOn).toBe(true)
+    })
+  })
 })
