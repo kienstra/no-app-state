@@ -139,7 +139,7 @@ describe('authors', () => {
   })
 
   describe('list', () => {
-    it('toggle author list', async () => {
+    it('toggles author list', async () => {
       expect((await makeReducers()(
         initialState,
         { type: 'TOGGLE_AUTHOR_LIST' }
