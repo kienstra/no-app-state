@@ -5,7 +5,6 @@ import { HomeComponent } from './Navigation/Home/HomeComponent'
 import { LoginRegisterComponent } from './Authentication/LoginRegisterComponent'
 import { AuthorsComponent } from './Authors/AuthorsComponent'
 import { BooksComponent } from './Books/BooksComponent'
-import { Spinner } from '@wordpress/components'
 
 export default function AppComponent() {
   const { state, dispatch } = useAppContext()
@@ -27,10 +26,6 @@ export default function AppComponent() {
       id: 'authorsLink',
       component: <AuthorsComponent key="authorsLink" />
     },
-    {
-      id: 'loadingSpinner',
-      component: <Spinner />,
-    }
   ]
 
   return (
