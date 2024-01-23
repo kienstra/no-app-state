@@ -137,4 +137,13 @@ describe('authors', () => {
       )
     })
   })
+
+  describe('list', () => {
+    it('toggle author list', async () => {
+      expect((await makeReducers(new StubHttpGateway())(
+        initialState,
+        { type: 'TOGGLE_AUTHOR_LIST' }
+      )).isAuthorListToggledOn).toBe(true)
+    })
+  })
 })
