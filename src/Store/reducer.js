@@ -119,7 +119,9 @@ function makeRegister(httpGateway, routerGateway) {
             email,
             password,
           },
-          messages: [],
+          messages: [
+            responseToMessage(registerReponse).serverMessage
+          ],
         },
         {
           payload: {

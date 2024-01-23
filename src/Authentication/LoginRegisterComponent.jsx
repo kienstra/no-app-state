@@ -5,7 +5,7 @@ import { useAppContext } from '../Store/context'
 export function LoginRegisterComponent() {
   const { dispatch } = useAppContext()
   const [email, setEmail] = useState('')
-  const [option, setOption] = useState('')
+  const [option, setOption] = useState('register')
   const [password, setPassword] = useState('')
 
   function getValidationMessages() {
