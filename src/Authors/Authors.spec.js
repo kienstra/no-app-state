@@ -140,7 +140,7 @@ describe('authors', () => {
 
   describe('list', () => {
     it('toggle author list', async () => {
-      expect((await makeReducers(new StubHttpGateway())(
+      expect((await makeReducers()(
         initialState,
         { type: 'TOGGLE_AUTHOR_LIST' }
       )).isAuthorListToggledOn).toBe(true)
