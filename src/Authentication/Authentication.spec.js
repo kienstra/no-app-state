@@ -11,7 +11,7 @@ import { StubRouterGateway } from '../Routing/StubRouterGateway'
 
 describe('Authentication', () => {
   describe('routing', () => {
-    it('should block wildcard *(default) routes when not logged in', async () => {
+    it('blocks wildcard *(default) routes when not logged in', async () => {
       expect(
         ( await runActions(
           routesToActions(['default']),
@@ -30,7 +30,7 @@ describe('Authentication', () => {
       ).toEqual('loginLink')
     })
 
-    it('should block secure routes when not logged in', async () => {
+    it('blocks secure routes when not logged in', async () => {
       expect(
         ( await runActions(
           routesToActions(['authorsLink']),
@@ -49,7 +49,7 @@ describe('Authentication', () => {
       ).toEqual('loginLink')
     })
 
-    it('should allow public routes when not logged in', async () => {
+    it('allows public routes when not logged in', async () => {
       expect(
         ( await runActions(
           routesToActions(['authorsLink-authorPolicyLink']),
@@ -91,7 +91,7 @@ describe('Authentication', () => {
       })
     })
 
-    it('should show failed server message on failed register', async () => {
+    it('shows failed server message on failed register', async () => {
       const httpGateway = new StubHttpGateway()
       const routerGateway = new StubRouterGateway()
       httpGateway.post = vi.fn().mockImplementation(() => {
@@ -111,9 +111,8 @@ describe('Authentication', () => {
           },
         })).messages).toEqual(['Failed: could not register.'])
     })
-    // })
 
-    it('should start at loginLink ', async () => {
+    it('starts at loginLink ', async () => {
       expect(
         (await runActions(
           routesToActions(['homeLink']),
@@ -132,7 +131,7 @@ describe('Authentication', () => {
       ).toEqual('loginLink')
     })
 
-    it('should go to homeLink on successful login (and populate userModel)', async () => {
+    it('goes to homeLink on successful login (and populate userModel)', async () => {
       const httpGateway = new StubHttpGateway()
       const routerGateway = new StubRouterGateway()
 
@@ -184,7 +183,7 @@ describe('Authentication', () => {
       ).not.toEqual('homeLink')
     })
 
-    it('should show failed user message on failed login', async () => {
+    it('shows failed user message on failed login', async () => {
       const httpGateway = new StubHttpGateway()
       const routerGateway = new StubRouterGateway()
 
@@ -210,7 +209,7 @@ describe('Authentication', () => {
       ).toEqual(['Failed: no user record.'])
     })
 
-    it('should clear messages on route change', async () => {
+    it('clears messages on route change', async () => {
       const httpGateway = new StubHttpGateway()
       const routerGateway = new StubRouterGateway()
 
@@ -242,7 +241,7 @@ describe('Authentication', () => {
       ).toEqual([])
     })
 
-    it('should log out', async () => {
+    it('logs out', async () => {
       const httpGateway = new StubHttpGateway()
       const routerGateway = new StubRouterGateway()
 

@@ -42,7 +42,7 @@ function getStubGateway(authorsStub) {
 
 describe('authors', () => {
   describe('loading', () => {
-    it('should load list author and books into viewModel', async () => {
+    it('loads list author and books into viewModel', async () => {
       expect(
         authorsVm(
           await makeReducers(getStubGateway(SingleAuthorsResultStub))(
@@ -62,7 +62,7 @@ describe('authors', () => {
       ])
     })
 
-    it('should show author list (toggle) when has authors', async () => {
+    it('shows author list (toggle) when has authors', async () => {
       expect(
         isAuthorListDisplaying(
           await makeReducers(getStubGateway(SingleAuthorsResultStub))(
@@ -76,7 +76,7 @@ describe('authors', () => {
       ).toEqual(true)
     })
 
-    it('should hide author list (toggle) when has more than 4 authors', async () => {
+    it('hides author list (toggle) when has more than 4 authors', async () => {
       const httpGateway = getStubGateway(ManyAuthorsResultStub)
 
       expect(
@@ -94,7 +94,7 @@ describe('authors', () => {
   })
 
   describe('saving', () => {
-    it('should allow books to be staged and then save authors and books to api', async () => {
+    it('stages books and saves authors and books to api', async () => {
       const authorName = 'Ernest Hemingway'
       const httpGateway = getStubGateway(SingleAuthorsResultStub)
       const state = await makeReducers(httpGateway)(

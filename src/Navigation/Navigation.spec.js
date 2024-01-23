@@ -48,7 +48,7 @@ describe('navigation', () => {
     ).toBe('')
   })
 
-  it('should navigate to the navigation link', async () => {
+  it('navigates to the navigation link', async () => {
     expect(
       navVm(
         await runActions(
@@ -69,7 +69,7 @@ describe('navigation', () => {
     ).toBe('Authors > authorsLink')
   })
 
-  it('should navigate down the navigation tree', async () => {
+  it('navigates down the navigation tree', async () => {
     expect(
       navVm(
         await runActions(
@@ -90,7 +90,7 @@ describe('navigation', () => {
     ).toBe('Author Policy > authorsLink-authorPolicyLink')
   })
 
-  it('should go to all links', async () => {
+  it('goes to all links', async () => {
     expect(
       navVm(
         await runActions(
