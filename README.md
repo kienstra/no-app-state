@@ -14,7 +14,7 @@ And unit testing would be really easy.
 
 This is like Redux.
 
-But we won't text Redux or React.
+But we won't test Redux or React.
 
 Only the [reducer functions](src/Store/reducer.js):
 
